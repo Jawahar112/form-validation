@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="style.css"
+</head>
+<body>
+
+<div class="container">
+<form id="form">
+<center>SIGN UP</center>
+<div class="form-group">
+<label for="username">username</label>
+<input type="text" id="username" data-name="username">
+<p>pls enter valid username</p>
+</div>
+<div class="form-group">
+<label for="email">email</label>
+<input type="text" id="email" data-name="email">
+<p>error message</p>
+</div>
+<div class="form-group">
+<label for="password">password</label>
+<input type="password" id="password" data-name="password">
+<p>error message</p>
+</div>
+<div class="form-group">
+<label for="password2">confirm password</label>
+<input type="password" id="password2" data-name="confirm password">
+<p>error message</p>
+</div>
+<div class="form-group" id="submit">
+<button type="submit">submit</button>
+</div>
+</form>
+</div>
+
+<script type="text/javascript">
+var form=document.querySelector('#form')
+var names=document.querySelector("#username")
+var password=document.querySelector("#password")
+var password2=document.querySelector("#password2")
+var email=document.querySelector("#email")
+keyfun([names,password,email,password2])
+form.addEventListener("submit",function(e){
+e.preventDefault();
+check([names,password,email,password2])
+passmatch(password,password2)
+})
+function check(inputs){
+inputs.forEach((input)=>{
+if(input.value.trim()===""){
+errorinput(input,`${getinput(input)} is required`)
+}
+else{
+successinput(input)
+}
+})
+}
+
+function successinput(input){
+
+var formgrp=input.parentElement;
+formgrp.className='form-group success'
+const p=formgrp.querySelector("p")
+p.innerHTML="";
+
+}
+function getinput(input){
+return input.getAttribute("data-name");
+}
+function errorinput(input, message) {
+  var formgrp = input.parentElement;
+  formgrp.className = 'form-group error';
+  const p = formgrp.querySelector('p');
+  p.innerHTML = message;
+}
+function passmatch(pass1,pass2){
+if(pass1.value!=pass2.value)
+{
+errorinput(pass2,'password doesnt  match')
+}
+}
+function keyfun(inputs){
+inputs.forEach((input)=>{
+input.onblur=function(){
+if(input.value==""){
+errorinput(input,`password feild is must fill`)
+}
+else{
+successinput(input)
+}
+}
+})
+}
+
+</script>
+</body>
+</html>
