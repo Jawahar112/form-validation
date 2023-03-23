@@ -29,6 +29,7 @@ height:100vh;
 .container input{
 outline:none;
 padding:6px;
+font-size:14px;
 }
 
 center{
